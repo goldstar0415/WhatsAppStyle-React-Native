@@ -3,23 +3,17 @@ import * as actions from '../actions/actions';
 
 const initialState = {
 	navColor:'#fff',
-  navStyle:{backgroundColor:'#ff585b', color:'#fff', padding:20},
+  navStyle: { backgroundColor:'#ff585b', color:'#fff', padding:20 },
   userDeets: {
   	email:"s.okoro07@gmail.com",
-
-}
+  }
 }
 
 export function tinder(state = initialState, action = {}) {
-    switch(action.type){
+  switch(action.type){
    case types.LOGIN:
+   return {...state};
 
-return {...state, };
-
-
-
-default:
-return state;
-
-}
+  default:
+    return state;
 }

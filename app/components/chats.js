@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import R from 'ramda';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   AppRegistry,
@@ -17,20 +18,8 @@ import {
   View
 } from 'react-native';
 
-var image1 = require('../images/image1.jpeg')
-var image2 = require('../images/image2.jpeg')
-var image3 = require('../images/image3.jpeg')
-var image4 = require('../images/image4.jpeg')
-var image5 = require('../images/image5.jpeg')
-var image6 = require('../images/image6.jpeg')
-var image7 = require('../images/image7.jpeg')
-var image8 = require('../images/image8.jpeg')
-var image9 = require('../images/image9.jpeg')
-var image10 = require('../images/image10.jpeg')
-var image11 = require('../images/image11.jpeg')
-
-
-var data = [{
+const images = R.range(0, 11).map(i => require(`../images/image${i}.jpeg`));
+const data = [{
   "id": 1,
   "first_name": "Amanda",
   "last_name": "Grant",
@@ -38,7 +27,7 @@ var data = [{
   "message": "rutrum",
   "isRead": false,
   "isViewed": false,
-  "image": image1
+  "image": images[0]
 }, {
   "id": 2,
   "first_name": "Gloria",
@@ -47,7 +36,7 @@ var data = [{
   "message": "viverra pede",
   "isRead": false,
   "isViewed": true,
-  "image": image2
+  "image": images[1]
 }, {
   "id": 3,
   "first_name": "Gloria",
@@ -56,7 +45,7 @@ var data = [{
   "message": "vehicula consequat",
   "isRead": true,
   "isViewed": false,
-  "image": image3
+  "image": images[2]
 }, {
   "id": 4,
   "first_name": "Linda",
@@ -65,7 +54,7 @@ var data = [{
   "message": "vehicula",
   "isRead": true,
   "isViewed": true,
-  "image": image4
+  "image": images[3]
 }, {
   "id": 5,
   "first_name": "Samantha",
@@ -74,7 +63,7 @@ var data = [{
   "message": "amet",
   "isRead": false,
   "isViewed": false,
-  "image": image5
+  "image": images[4]
 }, {
   "id": 6,
   "first_name": "Irene",
@@ -83,7 +72,7 @@ var data = [{
   "message": "quis orci nullam",
   "isRead": false,
   "isViewed": false,
-  "image": image6
+  "image": images[5]
 }, {
   "id": 7,
   "first_name": "Marilyn",
@@ -92,7 +81,7 @@ var data = [{
   "message": "felis sed lacus",
   "isRead": true,
   "isViewed": true,
-  "image": image7
+  "image": images[6]
 }, {
   "id": 8,
   "first_name": "Maya",
@@ -101,7 +90,7 @@ var data = [{
   "message": "purus aliquet at",
   "isRead": true,
   "isViewed": false,
-  "image": image8
+  "image": images[7]
 }, {
   "id": 9,
   "first_name": "Paula",
@@ -110,7 +99,7 @@ var data = [{
   "message": "aliquam lacus morbi",
   "isRead": true,
   "isViewed": true,
-  "image": image9
+  "image": images[8]
 }, {
   "id": 10,
   "first_name": "Ruth",
@@ -119,7 +108,7 @@ var data = [{
   "message": "integer tincidunt",
   "isRead": true,
   "isViewed": true,
-  "image": image10
+  "image": images[9]
 }, {
   "id": 11,
   "first_name": "Christy",
@@ -128,7 +117,7 @@ var data = [{
   "message": "parturient montes nascetur",
   "isRead": true,
   "isViewed": true,
-  "image": image11
+  "image": images[10]
 }, {
   "id": 12,
   "first_name": "Karen",
@@ -137,7 +126,7 @@ var data = [{
   "message": "pede libero",
   "isRead": false,
   "isViewed": false,
-  "image": image1
+  "image": images[0]
 }, {
   "id": 13,
   "first_name": "Annie",
@@ -146,7 +135,7 @@ var data = [{
   "message": "lacinia sapien quis",
   "isRead": false,
   "isViewed": false,
-  "image": image2
+  "image": images[1]
 }, {
   "id": 14,
   "first_name": "Ally",
@@ -155,7 +144,7 @@ var data = [{
   "message": "mauris morbi non",
   "isRead": false,
   "isViewed": true,
-  "image": image3
+  "image": images[2]
 }, {
   "id": 15,
   "first_name": "Georgie",
@@ -164,72 +153,68 @@ var data = [{
   "message": "rhoncus aliquam lacus",
   "isRead": false,
   "isViewed": true,
-  "image": image4
+  "image": images[3]
 }]
-
-var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class Chats extends Component {
-    constructor(props){
+  constructor(props){
     super(props)
-    
 
     this.state = {
       dataSource: ds.cloneWithRows(data),
-          }
-
+    }
   }
 
   eachMessage(x){
-    var num = Math.floor(Math.random() * 3) + 1
+    const num = Math.floor(Math.random() * 3) + 1
 
-    if(num > 1){
-     return(
-      <TouchableOpacity onPress ={() => {this.props.navigator.push({id:'chat', image:x.image, name:x.first_name})}}>
-<View style={{alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
-   <Image source = {x.image} style={{borderRadius:30, width:60,height:60, }} resizeMode='contain' />
-  <View>
-  <View style={{flexDirection:'row', justifyContent:'space-between', width:280}}>
-  <Text style={{marginLeft:15, fontWeight:'600'}}>{x.first_name} {x.last_name}</Text>
-  <Text style={{color:'#333', fontSize:10}}>{x.time}</Text>
-  </View>
-  <View style={{flexDirection:'row', alignItems:'center'}}>
-  <Text style={{ fontWeight:'400', color:'#333', marginLeft:15}}>Can I come over to yours tonight?</Text></View>
-  </View>
-
-   </View>
-   </TouchableOpacity>
-      )
+    if (num > 1) {
+     return (
+      <TouchableOpacity onPress ={() => {this.props.navigator.push({id:'chat', image:x.image, name:x.first_name}) }}>
+        <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
+          <Image source={x.image} style={{ borderRadius:30, width:60,height:60, }} resizeMode='contain' />
+          <View>
+            <View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
+              <Text style={{ marginLeft:15, fontWeight:'600' }}>{x.first_name} {x.last_name}</Text>
+              <Text style={{ color:'#333', fontSize:10 }}>{x.time}</Text>
+            </View>
+            <View style={{ flexDirection:'row', alignItems:'center' }}>
+              <Text style={{ fontWeight:'400', color:'#333', marginLeft:15 }}>Can I come over to yours tonight?</Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
    }
 
-    return(
+    return (
       <TouchableOpacity>
-<View style={{alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
-   <Image source = {x.image} style={{borderRadius:30, width:60,height:60, }} resizeMode='contain' />
-  <View>
-  <View style={{flexDirection:'row', justifyContent:'space-between', width:280}}>
-  <Text style={{marginLeft:15, fontWeight:'600'}}>{x.first_name} {x.last_name}</Text>
-  <Text style={{color:'#333', fontSize:10}}>{x.time}</Text>
-  </View>
-  <View style={{flexDirection:'row', alignItems:'center'}}>
-  <Icon name ="done-all" size = {15} color="#7dd5df" style={{marginLeft:15, marginRight:5}} />
-  <Text style={{ fontWeight:'400', color:'#333'}}>{x.message}</Text></View>
-  </View>
-
-   </View>
-   </TouchableOpacity>
-      )
+        <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
+          <Image source={x.image} style={{ borderRadius:30, width:60, height:60 }} resizeMode='contain' />
+          <View>
+            <View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
+              <Text style={{ marginLeft:15, fontWeight:'600' }}>{x.first_name} {x.last_name}</Text>
+              <Text style={{ color:'#333', fontSize:10 }}>{x.time}</Text>
+            </View>
+            <View style={{ flexDirection:'row', alignItems:'center' }}>
+              <Icon name="done-all" size={15} color="#7dd5df" style={{ marginLeft:15, marginRight:5 }} />
+              <Text style={{ fontWeight:'400', color:'#333' }}>{x.message}</Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
   }
-
 
   render() {
     return (
-      <View style={{flex:1}}>
-<ListView 
-dataSource = {this.state.dataSource} 
-renderRow={(rowData) => this.eachMessage(rowData)}
-/>
-</View>
+      <View style={{ flex:1 }}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => this.eachMessage(rowData)}
+        />
+      </View>
     );
   }
 }
