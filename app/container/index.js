@@ -5,7 +5,6 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-
 import * as reducers from '../reducers';
 import Components from '../components/';
 
@@ -13,23 +12,16 @@ const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
 
-
-
 export default class Index extends Component {
-
-
-  componentDidMount(){
-  }
   render() {
     return (
       <View
-       style={{flex:1}}>
-       <StatusBar
-     barStyle="light-content"
-   />
-      <Provider store={store}>
+       style={{ flex:1 }}>
+       <StatusBar barStyle="light-content" />
+       <Provider store={store}>
         <Components/>
-      </Provider>
-      </View>);
+       </Provider>
+      </View>
+    );
   }
 }

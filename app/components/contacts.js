@@ -17,12 +17,12 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-var image1 = require('../images/geasy.jpg')
-var image2 = require('../images/eminem.jpg')
-var image3 = require('../images/kyle.jpg')
-var image4 = require('../images/devon.jpg')
 
-var data = [{
+const image1 = require('../images/geasy.jpg')
+const image2 = require('../images/eminem.jpg')
+const image3 = require('../images/kyle.jpg')
+const image4 = require('../images/devon.jpg')
+const data = [{
   "id": 1,
   "first_name": "G Eazy",
   "message": "I just need to be alone",
@@ -43,10 +43,7 @@ var data = [{
   "message": "Where the Avacados at tho?",
   "image": image4
 }]
-
-
-
-var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class Contacts extends Component {
     constructor(props){
@@ -54,42 +51,40 @@ export default class Contacts extends Component {
 
     this.state = {
       dataSource: ds.cloneWithRows(data),
-          }
-
+    }
   }
 
   eachMessage(x){
-    return(
+    return (
       <TouchableOpacity>
-<View style={{alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
-   <Image source = {x.image} style={{borderRadius:30, width:60,height:60, }} resizeMode='contain' />
-  <View>
-  <View style={{flexDirection:'row', justifyContent:'space-between', width:280}}>
-  <Text style={{marginLeft:15, fontWeight:'600', color:'#222', fontSize:15}}>{x.first_name}</Text>
-  <Text style={{fontWeight:'200', color:'#777', fontSize:13}}>MOBILE</Text>
-
-  </View>
-  <View style={{flexDirection:'row', alignItems:'center'}}>
-  <Text style={{ fontWeight:'400', color:'#666', fontSize:12, marginLeft:15}}>{x.message}</Text></View>
-  </View>
-
-   </View>
-   </TouchableOpacity>
-      )
+        <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
+          <Image source={x.image} style={{ borderRadius:30, width:60, height:60 }} resizeMode='contain' />
+          <View>
+            <View style={{ flexDirection:'row', justifyContent:'space-between', width:280 }}>
+              <Text style={{ marginLeft:15, fontWeight:'600', color:'#222', fontSize:15 }}>{x.first_name}</Text>
+              <Text style={{ fontWeight:'200', color:'#777', fontSize:13 }}>MOBILE</Text>
+            </View>
+            <View style={{ flexDirection:'row', alignItems:'center' }}>
+              <Text style={{ fontWeight:'400', color:'#666', fontSize:12, marginLeft:15 }}>{x.message}</Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
   }
-
 
   render() {
     return (
-      <View style={{flex:1}}>
-<ListView 
-dataSource = {this.state.dataSource} 
-renderRow={(rowData) => this.eachMessage(rowData)}
-/>
-</View>
+      <View style={{ flex:1 }}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => this.eachMessage(rowData)}
+        />
+      </View>
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -108,4 +103,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-
