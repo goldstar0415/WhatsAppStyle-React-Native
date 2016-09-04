@@ -12,6 +12,7 @@
     "react-native-invertible-scroll-view": "^1.0.0",
     "react-native-scrollable-tab-view": "^0.5.5",
     "react-native-vector-icons": "^2.1.0",
+    "react-native-invertible-scroll-view" : "1.0.0",
     "react-redux": "4.4.0",
     "redux": "3.3.1",
     "redux-thunk": "1.0.3"
