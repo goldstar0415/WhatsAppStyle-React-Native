@@ -16,4 +16,5 @@ export function tinder(state = initialState, action = {}) {
 
   default:
     return state;
+	}
 }

@@ -18,8 +18,10 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import renderImages from '../fake/fakeImage';
 
-const images = R.range(0, 10).map(i => require(`../images/image${i}.jpeg`));
+// const images = R.range(1, 11).map(i => require(`../images/image${i}.jpeg`));
+const images = R.range(1, 11).map(i => i);
 const data = [{
   "id": 1,
   "first_name": "Bruce",
@@ -106,7 +108,9 @@ export default class Calls extends Component {
     return (
       <TouchableOpacity>
         <View style={{ alignItems:'center', padding:10, flexDirection:'row', borderBottomWidth:1, borderColor:'#f7f7f7' }}>
-          <Image source={x.image} style={{ borderRadius:30, width:60, height:60 }} resizeMode='contain' />
+          {
+            renderImages(x.image)
+          }
           <View>
             <View style={{ flexDirection:'row', justifyContent:'space-between', width:260 }}>
             <Text style={{ marginLeft:15, fontWeight:'600', color:'#222' }}>{x.first_name}'s Mom</Text>
@@ -151,4 +155,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-

@@ -19,9 +19,12 @@ import {
   View
 } from 'react-native';
 
+import renderImages from '../fake/fakeImage';
+
 const { width, height } = Dimensions.get('window');
 const convo = []
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+const iconStyle = { width:30, height:30, borderRadius:15, margin:5 };
 
 export default class Chaty extends Component {
   constructor(props){
@@ -73,6 +76,7 @@ export default class Chaty extends Component {
   }
 
   render() {
+    const { image } = this.props;
     return (
       <Image source={require('../images/background.jpg')} style={styles.container}>
         <View style={{ height:65, flexDirection:'row', justifyContent:'space-between', backgroundColor:'#075e54', alignItems:'center', paddingTop:10 }}>
@@ -80,7 +84,9 @@ export default class Chaty extends Component {
             <TouchableOpacity onPress={() => this.props.navigator.pop()}>
               <Icon name="navigate-before" color='#fff' size={23} style={{ }} />
             </TouchableOpacity>
-            <Image source={require('../images/image1.jpeg')} style={{ width:30, height:30, borderRadius:15, margin:5 }} />
+            {
+              renderImages(image, iconStyle)
+            }
             <Text style={{ color:'#fff', fontWeight:'600', margin:10, fontSize:15 }}>{this.props.name}</Text>
           </View>
           <View style={styles.row}>
@@ -133,4 +139,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-

@@ -29,7 +29,12 @@ export default class ThreePanels extends Component {
             <Icon name="more-vert" color='#fff' size={23} style={{ padding:5 }} />
           </View>
         </View>
-        <ScrollableTabView tabBarUnderlineColor="#fff" tabBarBackgroundColor ='#075e54' tabBarActiveTextColor="#fff" tabBarInactiveTextColor="#88b0ac">
+        <ScrollableTabView
+          tabBarUnderlineColor="#fff"
+          tabBarBackgroundColor ='#075e54'
+          tabBarActiveTextColor="#fff"
+          tabBarInactiveTextColor="#88b0ac"
+        >
           <Calls tabLabel="YO' MAMAS" />
           <Chats tabLabel="YO' GIRLS" {...this.props} />
           <Contacts tabLabel="MA NI**AS" />
@@ -69,4 +74,3 @@ const styles = StyleSheet.create({
     justifyContent:'space-between'
   },
 });
-
