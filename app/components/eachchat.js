@@ -25,6 +25,7 @@ const { width, height } = Dimensions.get('window');
 const convo = []
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 const iconStyle = { width:30, height:30, borderRadius:15, margin:5 };
+const userIcon = { height:40, width:40, margin:5, borderRadius:20, backgroundColor:'#f8f8f8' };
 
 export default class Chaty extends Component {
   constructor(props){
@@ -36,10 +37,13 @@ export default class Chaty extends Component {
     }
   }
 
-  eachMessage(x){
+  eachMessage(x, image){
     if(x.person == 2){
       return (
         <View style={{ flexDirection:'row', alignItems:'flex-end', margin:5 }}>
+          {
+            renderImages(image, userIcon)
+          }
           <View style={{ width:220, borderRadius:10, backgroundColor:'#f4f4f4', padding:10 }}>
             <Text style={{ fontSize:15, color:'#555', fontWeight:'600' }}>{x.note}</Text>
           </View>
@@ -51,15 +55,23 @@ export default class Chaty extends Component {
             <View style={{ width:220, borderRadius:10, backgroundColor:'#00b499', padding:10 }}>
               <Text style={{ fontSize:15, color:'#fff', fontWeight:'600' }}>{x.note}</Text>
             </View>
-            <Image source ={require('../images/profile.jpg')} resizeMode="contain" style={{ height:40, width:40, margin:5, borderRadius:20, backgroundColor:'#f8f8f8' }} />
+            <Image
+              source ={require('../images/profile.jpg')}
+              resizeMode="contain"
+              style={userIcon}
+            />
           </View>
         )}
   }
   submitThis(){
-    convo.push({person:1, note:this.state.note})
+    convo.push({
+      person: 1,
+      note: this.state.note
+    });
 
     this.setState({
-      datasource: ds.cloneWithRows(convo.reverse())
+      datasource: ds.cloneWithRows(convo.reverse()),
+      note: ''
     })
 
     setTimeout(() => {
@@ -77,6 +89,7 @@ export default class Chaty extends Component {
 
   render() {
     const { image } = this.props;
+    const { note } = this.state;
     return (
       <Image source={require('../images/background.jpg')} style={styles.container}>
         <View style={{ height:65, flexDirection:'row', justifyContent:'space-between', backgroundColor:'#075e54', alignItems:'center', paddingTop:10 }}>
@@ -103,12 +116,13 @@ export default class Chaty extends Component {
         style={{ flex:1, }}
         contentContainerStyle={{ justifyContent:'flex-end' }}
         dataSource={this.state.datasource}
-        renderRow={(rowData) => this.eachMessage(rowData)}
+        renderRow={(rowData) => this.eachMessage(rowData, image)}
       />
         <View style={{ alignSelf:'flex-end', padding:10, height:60, width:width, borderTopWidth:1, borderColor:'#f3f3f3', backgroundColor:'#fff' }}>
           <TextInput
             style={{ flex:1, }}
-            onChangeText={(text) => this.setState({note:text})}
+            value={note}
+            onChangeText={(note) => this.setState({ note })}
             onSubmitEditing={() => this.submitThis()}
             placeholder="Enter Your message here"
           />
